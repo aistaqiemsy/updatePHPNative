@@ -6,34 +6,26 @@
     while($data = mysqli_fetch_array($query)) {
         ?>
 
-        <form action="#" method="post">
+        <form action="prosesUpload.php" method="post" enctype="multipart/form-data">
             <table>
-            <tr>
-                <td>Nama</td><td><input type="text" name="txNama" value="<?php echo $data['nama']; ?>"></td>
-            </tr>
-            <tr>
-                <td>Alamat</td><td><input type="text" name="txAlamat" value="<?php echo $data['alamat']; ?>"></td>
-            </tr>
-            <tr>
-                <td></td><td><input type="submit" name="btPerbarui" value="Perbarui Data"></td>
-            </tr>
+                <tr>
+                    <td>ID</td><td><input type="text" name="txId" value="<?php echo $data['id']; ?>"></td>
+                </tr>
+                <tr>
+                    <td>Nama</td><td><input type="text" name="txNama" value="<?php echo $data['nama']; ?>"></td>
+                </tr>
+                <tr>
+                    <td>Alamat</td><td><input type="text" name="txAlamat" value="<?php echo $data['alamat']; ?>"></td>
+                </tr>
+                <tr>
+                    <td></td><td><input type="file" name="gambar[]"></td>
+                </tr>
+                <tr>
+                    <td></td><td><input type="submit" name="btPerbarui" value="Perbarui Data"></td>
+                </tr>
             </table>
         </form>
         <?php
-
-        if(isset($_POST['btPerbarui'])) {
-            $nama   = $_POST['txNama'];
-            $alamat = $_POST['txAlamat'];
-            $query  = mysqli_query(
-                $koneksi, 
-                "UPDATE tb_data SET nama = '$nama', alamat = '$alamat' WHERE id = '$id'");
-
-                if ($query) { // jika query update berhasil, maka langsung pindah halaman tampil data
-                    header("location: index.php");
-                } else { // bila gagal
-                    echo "Data gagal diperbarui :(";
-                }
-        }
     }
 ?>
 
